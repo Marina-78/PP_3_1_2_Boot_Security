@@ -1,7 +1,6 @@
 package ru.kata.spring.boot_security.demo.UserDao;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
 
@@ -22,7 +21,6 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    @Transactional
     public void saveUser(User user) {
         entityManager.persist(user);
     }
@@ -33,13 +31,11 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    @Transactional
     public void editUser(User user) {
         entityManager.merge(user);
     }
 
     @Override
-    @Transactional
     public void removeUser(Long id) {
         entityManager.remove(getUser(id));
     }
@@ -55,5 +51,6 @@ public class UserDaoImpl implements UserDao {
         List<Role> roles = entityManager.createQuery("select r from Role r", Role.class).getResultList();
         return roles;
     }
+
 }
 
